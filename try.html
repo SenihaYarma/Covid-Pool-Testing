@@ -1,0 +1,97 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <title>Schedule  </title>
+        <style type = text/css> 
+        table, tr, th, td { 
+            border: 1px solid black;
+            height: 50px;
+            vertical-align: bottom;
+            padding: 15px;
+            text-align: left;
+        }
+        </style>
+    </head>
+    <body>
+        <h1> Schedule </h1><br>
+        <br></br>
+        <table>
+            <tr>
+                <th> Emp ID </th>
+                <th> Test Barcode </th>
+            </tr>
+            <tr>
+                <td> <input type=checkbox> Emp ID </td>
+                <td> Test Barcode </td>
+            </tr>
+        </table>
+        <form action="/labLogin/labHome/testCollection" method="get"><button name="delete"> Delete </button></form>
+    </body>   
+</html>
+
+
+
+
+// function validate(labId, password) {
+    //     console.log("in");
+    //     MongoClient.connect(urll, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
+    //         if (err) throw err;
+    //         var dbo = db.db("Final");
+    //         dbo.collection("LabEmployee").findOne({labID: labId, password: password}, function(err, result) {
+    //             if(err) throw err;
+    //             if(!result){
+    //                 console.log("Either ID or password is incorrect");
+    //                 alert("Either ID or password is incorrect");
+    //                 return res.redirect('/labLogin');
+    //             }
+    //             else{
+    //                 console.log("succesfull");
+    //                 return res.redirect('/labLogin/labHome');
+    //             }
+    //         });
+    //         db.close();
+    //     });
+    // }
+    
+    //<input type="submit" values="Submit" onclick="validate(labId, password)">
+
+
+
+    app.get("/labLogin/labHome/testCollection", (req, res) => {
+        MongoClient.connect(urll, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("Final");
+            res.writeHead(200, { "Content-Type": "text/html" });
+            let query = url.parse(req.url, true).query;
+    
+            let labId = query.labId ? query.labId : "";
+            let empId = query.empId ? query.empId : "";
+            let barcode = query.barcode ? query.barcode: "";  
+    
+            let html = '<!DOCTYPE html><html lang="en"><head> <title> Lab Login Page </title><style type = text/css> table, tr, th, td { border: 1px solid black;height: 25px;vertical-align: bottom;padding: 10px;text-align: left;}</style></head><body><h1> Lab Login Page </h1><br><form method="get" action ="/labLogin/labHome/testCollection"><b>Employee ID:</b><input type="text" name="empId" value=""></input><br><b>Test Barcode:</b><input type="text" name="barcode" value=""></input><input type="submit" values="Add"><br></form><br><br><table><tr><th> Emp ID </th><th> Test Barcode </th></tr><tr><td> <input type=checkbox> Emp ID </td><td> Test Barcode </td></tr></table><form action="/labLogin/labHome/testCollection" method="get"><button name="delete"> Delete </button></form></body></html>';
+            var same = dbo.collection("EmployeeTest").findOne({testBarcode: barcode,employeeID: empId});
+            if (empId != "" && same == ""){
+            dbo.collection("EmployeeTest").insertOne({testBarcode: barcode,employeeID: empId, collectionTime: '12/12/2020', collectedBy: labId}, function(err) {
+                if(err) throw err;
+                dbo.collection("EmployeeTest").find().toArray(function(err, result) {
+                    if (err) throw err;
+                    html = html.replace('<tr><td> <input type=checkbox> Emp ID </td><td> Test Barcode </td></tr>', getTest(result));
+                
+                res.write(html);
+                res.end();
+                db.close();
+                });
+            });
+            }
+            else{
+                dbo.collection("EmployeeTest").find().toArray(function(err, result) {
+                    if (err) throw err;
+                    html = html.replace('<tr><td> <input type=checkbox> Emp ID </td><td> Test Barcode </td></tr>', getTest(result));
+                
+                res.write(html);
+                res.end();
+                db.close();
+                });
+            }
+        });
+    });

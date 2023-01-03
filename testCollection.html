@@ -1,0 +1,57 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <title> Lab Login Page </title>
+    <style type = text/css> 
+        table, tr, th, td { 
+            border: 1px solid black;
+            height: 50px;
+            vertical-align: bottom;
+            padding: 15px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1> Lab Login Page </h1><br>
+    <form method="get" action ="/labLogin/labHome/testCollection">
+        <b>Employee ID:</b>
+        <input type="text" name="empId" value=""></input><br>
+        <b>Test Barcode:</b>
+        <input type="text" name="barcode" value=""></input>
+        <input type="submit" values="Add"><br>
+    </form>
+    <form action="/labLogin/labHome/testCollection" method="get">
+    <table>
+        <tr>
+            <th> Emp ID </th>
+            <th> Test Barcode </th>
+        </tr>
+        <tr>
+            <td> <input type="checkbox" class="checks"> Emp ID </td>
+            <td> Test Barcode </td>
+        </tr>
+    </table>
+        <input onclick="getValue();return false;" name="delete" type="search" values="Delete">
+    </form>
+    <script>
+        function getValue(){
+            var checks = document.getElementsByClassName('checks');
+            var arr = [];
+            var len = checks.length;
+            var arrLen = 0;
+
+            for(i = 0; i < len; i++){
+                if(checks[i].checked == true){
+                    arr[arrLen] = checks[i].value;
+                    arrLen++;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+<!-- <!DOCTYPE html><html lang="en"><head> <title> Lab Login Page </title><style type = text/css> table, tr, th, td { border: 1px solid black;height: 50px;vertical-align: bottom;padding: 15px;text-align: left;}</style></head><body><h1> Lab Login Page </h1><br><form method="get" action ="/labLogin/labHome/testCollection"><b>Employee ID:</b><input type="text" name="empId" value=""></input><br><b>Test Barcode:</b><input type="text" name="barcode" value=""></input><input type="submit" values="Add"><br></form><table><tr><th> Emp ID </th><th> Test Barcode </th></tr><tr><td> <input type=checkbox> Emp ID </td><td> Test Barcode </td></tr></table><form action="/labLogin/labHome/testCollection" method="get"><button name="delete"> Delete </button></form></body></html> -->

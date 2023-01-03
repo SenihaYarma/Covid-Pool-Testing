@@ -1,0 +1,78 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <title> Lab Login Page </title>
+</head>
+<body>
+    <h1> Lab Login Page </h1><br>
+    <form method="get" action ="/labLogin">
+        <b>Lab ID:</b>
+        <input type="text" name="labId" value=""></input><br>
+        <b>Password:</b>
+        <input type="text" name="password" value=""></input>
+    </form>
+    <button onclick="validate(labId, password)" type="submit" form="form1" value="Submit">Log In</button>
+    <script>
+        function validate(labId, password) {
+            console.log("in");
+            MongoClient.connect(urll, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("Final");
+            dbo.collection("LabEmployee").findOne({labID: labId, password: password}, function(err, result) {
+            if(err) throw err;
+            if(!result){
+                console.log("Either ID or password is incorrect");
+                alert("Either ID or password is incorrect");
+                return res.redirect('/labLogin');
+            }
+            else{
+                console.log("succesfull");
+                return res.redirect('/labLogin/labHome');
+            }
+        });
+        db.close();
+    });
+}
+    </script>
+</body>
+</html>
+ 
+<!-- <form action="/labLogin/labHome" method="get"><button> Lab login </button></form> -->
+
+<!-- <!DOCTYPE html><html lang="en"><head><title> Lab Login Page </title></head><body><h1> Lab Login Page </h1><br><form method="get" action ="/labLogin"><b>Lab ID:</b><input type="text" name="labId" value=""></input><br><b>Password:</b><input type="text" name="password" value=""></input><input type="submit" values="Submit"><br></form> -->
+
+
+    MongoClient.connect(urll, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("Final");
+        res.writeHead(200, { "Content-Type": "text/html" });
+        let query = url.parse(req.url, true).query;
+
+        let labId = query.labId ? query.labId : "";
+        let password = query.password ? query.password: "";  
+
+        let html = '<!DOCTYPE html><html lang="en"><head><title> Lab Login Page </title></head><body><h1> Lab Login Page </h1><br><form name="myForm" method="get" action ="/labLogin/labHome" onsubmit="return validateForm(labId, password)"><b>Lab ID:</b><input type="text" name="labId" value=""></input><br><b>Password:</b><input type="text" name="password" value=""></input><input type="submit" values="Submit"><br></form>';
+        dbo.collection("LabEmployee").findOne({labID: labId, password: password}, function(err, result) {
+            if(err) throw err;
+            if(!result){
+                res.write(html + '\n\n<h4 style="color: maroon;"> Either ID or password is incorrect </h4></body>\n</html>');
+                res.end();
+            }
+            // go to lab home page
+            else{
+                let homeHtml = '<!DOCTYPE html><html lang="en"><head><title> Lab Home </title></head><body><h1 style="text-align:center"> Lab Home </h1><br><form action="/labLogin/labHome/testCollection" method="get" style="text-align:center"><button> Test Collection </button></form><br><form action="/labLogin/labHome/poolMapping" method="get" style="text-align:center"><button> Pool Mapping </button></form><br><form action="/labLogin/labHome/wellTesting" method="get" style="text-align:center"><button> Well Testing </button></form><br></body></html>';
+                res.write(html + "\n\n</body>\n</html>");
+                res.end();
+                app.get("/labLogin/labHome", (req, res) => {
+                    res.write(homeHtml);
+                    res.end();
+                }); 
+            }
+            db.close();
+        });
+    });
+
+
+
+
+    <script>function validate(labId, password) {console.log("in");MongoClient.connect(urll, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {if (err) throw err;var dbo = db.db("Final");dbo.collection("LabEmployee").findOne({labID: labId, password: password}, function(err, result) {if(err) throw err;if(!result){console.log("Either ID or password is incorrect");alert("Either ID or password is incorrect");return res.redirect('/labLogin');}else{console.log("succesfull");return res.redirect('/labLogin/labHome');}});db.close();});}</script>

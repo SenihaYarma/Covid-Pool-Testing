@@ -1,0 +1,68 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <title> Pool Mapping </title>
+    <style type = text/css> 
+        table, tr, th, td { 
+            border: 1px solid black;
+            height: 15px;
+            vertical-align: bottom;
+            padding: 5px;
+            text-align: left;
+        }
+        fieldset {
+            background-color: #eeeeee;
+            width: 250px;
+            text-align: center;
+            margin-left: 100px;
+        }
+        input {
+            margin: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1> Pool Mapping </h1><br>
+    <form method="get" action ="/labLogin/labHome/poolMapping">
+        <b>Pool Barcode:</b>
+        <input type="text" name="poolBar" value=""></input><br>
+        <b>Test Barcodes:</b>
+        <fieldset style="padding: 15px;">
+            <input id="1" type="text" name="barcode" value="" multiple></input>
+            <input id="2" type="button" onclick="myFunction()" value="Delete"></input>
+            <br><input id="row" type="button" onclick="addFunction()" value="Add More Rows"></input>
+        </fieldset>
+        <input type="submit" value="Submit Pool" style="margin-left: 75px;"><br>
+    </form><br><br>
+    
+    <form action="/labLogin/labHome/poolMapping" method="get">
+    <table>
+        <tr>
+            <th> Pool Barcode </th>
+            <th> Test Barcode </th>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name='del' value = '0'> Pool Barcode </td>
+            <td> Test Barcode </td>
+        </tr>
+    </table>
+        <input type="submit" value="Delete">
+    </form>
+
+    
+    <script>
+        function myFunction(){
+            document.getElementById("2").previousElementSibling.remove();
+            document.getElementById("2").remove();
+        }
+
+        function addFunction(){
+            var h = document.getElementById("row").previousElementSibling;
+            var code = '<input id="1" type="text" name="barcode" value=""></input><input id="2" type="button" onclick="myFunction()" value="Delete"></input>';
+            h.insertAdjacentHTML("afterend", code);
+        }
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html> <html lang="en"> <head> <title> Pool Mapping </title><style type = text/css> table, tr, th, td { border: 1px solid black;height: 15px;vertical-align: bottom;padding: 5px;text-align: left;}fieldset {background-color: #eeeeee;width: 250px;text-align: center;margin-left: 100px;}input {margin: 3px;}</style></head><body><h1> Pool Mapping </h1><br><form method="get" action ="/labLogin/labHome/poolMapping"><b>Pool Barcode:</b><input type="text" name="poolBar" value=""></input><br><b>Test Barcodes:</b><fieldset style="padding: 15px;"><input id="1" type="text" name="barcode" value="" multiple></input><input id="2" type="button" onclick="myFunction()" value="Delete"></input><br><input id="row" type="button" onclick="addFunction()" value="Add More Rows"></input></fieldset><input type="submit" value="Submit Pool" style="margin-left: 75px;"><br></form><br><br><form action="/labLogin/labHome/poolMapping" method="get"><table><tr><th> Pool Barcode </th><th> Test Barcode </th></tr><tr><td><input type="checkbox" name='del'> Pool Barcode </td><td> Test Barcode </td></tr></table><input type="submit" value="Delete"></form><script>function myFunction(){document.getElementById("2").previousElementSibling.remove();document.getElementById("2").remove();}function addFunction(){var h = document.getElementById("row").previousElementSibling;var code = '<input id="1" type="text" name="barcode" value=""></input><input id="2" type="button" onclick="myFunction()" value="Delete"></input>';h.insertAdjacentHTML("afterend", code);}</script></body></html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <title>Get Check Box</title>
+
+</head>
+<body>
+    <div class="container">
+        <input type="checkbox" class="checks" value="Apple"> A__<br>
+        <input type="checkbox" class="checks" value="Apple"> A__<br>
+        <input type="checkbox" class="checks" value="Apple"> A__<br>
+        <br><br>
+        <a href="#" onclick="getValue();return false;">Get Value</a>
+        
+        <script>
+            function getValue(){
+
+                var checks = document.getElementsByClassName('checks');
+                var str = '';
+                var len = checks.length;
+                alert(len);
+
+                for(i = 0; i < 3; i++){
+                    if(checks[i].checked == true){
+                        str += checks[i].value +" ";
+                    }
+                }
+                alert(str);
+            }
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+Employee
+
+db.Employee.insertOne({employeeID: '10000000', email: 'employee1', firstName: 'John', lastName: 'Walker', passcode: 'abc123'});
+
+----------------------------------
+
+LabEmployee
+
+db.LabEmployee.insertOne({labID: '10000000', password: 'abc123'});
+
+----------------------------------
+
+EmployeeTest
+
+db.EmployeeTest.insertOne({testBarcode: '002',employeeID: '10000001', collectionTime: '11/07/2020', collectedBy: '10000000'});
+
+----------------------------------
+
+Pool
+
+db.Pool.insertOne({poolBarcode: '0001'});
+
+----------------------------------
+
+PoolMap
+
+db.PoolMap.insertOne({testBarcode: '001', poolBarcode: '0001'});
+
+----------------------------------
+
+Well
+
+db.Well.insertOne({wellBarcode: '00001'});
+
+----------------------------------
+
+WellTesting
+
+db.WellTesting.insertOne({poolBarcode: '0001', wellBarcode: '00001', testingStartTime: '11/07/2020', testingEndTime: '11/14/2020', result: 'in progress'});
+

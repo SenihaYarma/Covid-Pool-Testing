@@ -1,0 +1,51 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <title> Well Testing </title>
+    <style type = text/css> 
+        table, tr, th, td { 
+            border: 1px solid black;
+            height: 15px;
+            vertical-align: bottom;
+            padding: 5px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1> Well Testing </h1><br>
+    <form method="get" action ="/labLogin/labHome/wellTesting">
+        <b>Well Barcode:</b>
+        <input type="text" name="wellBar" value=""></input><br>
+        <b>Pool Barcode:</b>
+        <input type="text" name="poolBar" value=""></input><br>
+        <b>Result:</b>
+        <select name="result">
+            <option value="inProgress">in progress</option>
+            <option value="neg">negative</option>
+            <option value="pos">positive</option>
+        </select>
+        <input type="submit" values="Add"><br>
+    </form><br><br>
+    <form method="get" action ="/labLogin/labHome/wellTesting">
+    <table>
+        <tr>
+            <th> Well Barcode </th>
+            <th> Pool Barcode </th>
+            <th> Result </th>
+        </tr>
+        <tr>
+            <td> <input type="checkbox"> Well Barcode </td>
+            <td> Pool Barcode </td>
+            <td> Result </td>
+        </tr>
+    </table><br>
+        <input type="submit" value="Edit" name="as">
+        <input type="submit" value="Delete" name="as">
+    </form>
+</body>
+</html>
+
+<input type="text" name="wellBar" value=""></input><br><b>Pool Barcode:</b><input type="text" name="poolBar" value=""></input><br><b>Result:</b><select name="result"><option value="inProgress">in progress</option><option value="neg">negative</option><option value="pos">positive</option></select>
+
+<!DOCTYPE html> <html lang="en"> <head> <title> Well Testing </title><style type = text/css> table, tr, th, td { border: 1px solid black;height: 15px;vertical-align: bottom;padding: 5px;text-align: left;}</style></head><body><h1> Well Testing </h1><br><form method="get" action ="/labLogin/labHome/wellTesting"><b>Well Barcode:</b><input type="text" name="wellBar" value=""></input><br><b>Pool Barcode:</b><input type="text" name="poolBar" value=""></input><br><b>Result:</b><select name="result"><option value="inProgress">in progress</option><option value="neg">negative</option><option value="pos">positive</option></select><input type="submit" values="Add"><br></form><br><br><form method="get" action ="/labLogin/labHome/wellTesting"><table><tr><th> Well Barcode </th><th> Pool Barcode </th><th> Result </th></tr><tr><td> <input type="checkbox"> Well Barcode </td><td> Pool Barcode </td><td> Result </td></tr></table><br><input type="submit" value="Delete"></form></body></html>
